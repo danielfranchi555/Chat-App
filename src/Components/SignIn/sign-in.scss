@@ -1,0 +1,51 @@
+.container-SignIn{
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    color:#142d4c ;
+    .form-SignIn{
+        width: 400px;
+        height: 400px;
+        background-color:#f7f6e7;
+        display: flex;
+        gap: 20px;
+        flex-direction: column;
+        border-radius: 20px;
+        justify-content: center;
+        align-items: center;
+        .title-SignIn{
+            text-align: center;
+            font-size: 15px;
+        }
+        .header-form{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 300px;
+            .parrafo-header-form{
+                font-size: 13px;
+            }
+            .parrafo-header-form-register{
+                font-size: 13px;
+                color: #24527a;
+            }
+        }
+        .div-button{
+            margin: 10px;
+            .button{
+                background-color:#24527a ;
+                color: white;
+            }
+        }
+    }
+}
+@media screen and (max-width: 480px) {
+    .container-SignIn{
+        .form-SignIn{
+          
+         width: 300px;
+    }
+    }
+    
+}

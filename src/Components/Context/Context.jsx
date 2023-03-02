@@ -4,7 +4,8 @@ export const useDataContext = ()=> useContext(DataContext)
 const Context = ({children}) => {
     const initialState = {
         email:'',
-       password:''
+        displayName:'',
+        password:''
       }
     const [userinfo,setUserInfo]= useState(initialState)
 

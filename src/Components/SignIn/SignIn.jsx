@@ -10,6 +10,7 @@ const SignIn = () => {
     email:'',password:''
  } 
  const [user,setUser]=useState(initialState)
+ const [loading,setLoading]=useState(true)
 
 
   const navigate=  useNavigate()
@@ -26,6 +27,7 @@ const SignIn = () => {
             await  signInWithEmailAndPassword(auth,user.email,user.password)
             console.log(data)
             setUser(initialState)
+            setLoading(true)
             navigate('/home')
      } catch (error) {
       if(error.code === 'auth/user-not-found')
@@ -36,7 +38,9 @@ const SignIn = () => {
 
   return (
     <div className="container-SignIn" >
-      <div>
+     
+        {user &&
+        <div>
       <form className="form-SignIn"
        onSubmit={handleSumbit}
         action=""
@@ -90,12 +94,15 @@ const SignIn = () => {
           />
         </Stack>
         </div>
-        <div className="div-button" >
+{/*         {loading? <p>loading</p>:null}
+ */}        <div className="div-button" >
            <Button className="button" type="submit">Iniciar Sesion</Button>
         </div>
       </form>
       </div>
      
+      }
+        
     </div>
   );
 };

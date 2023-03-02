@@ -10,27 +10,29 @@ import chatImage from '../images/chat.png'
 import './sign-up.scss'
 const SignUp = () => {
   const navigate = useNavigate();
-  const { userinfo, setUserInfo, initialState } =
+  const { userinfo, setUserInfo, initialState } = useDataContext()
     useDataContext();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserInfo({ ...userinfo, [name]: value });
+    setUserInfo({ ...userinfo,[name]:value });
     console.log(name, value);
   };
+  
 
   const handleSubmit = async (e) => {
     try {
       e.preventDefault();
-      const data = await createUserWithEmailAndPassword(
+     await createUserWithEmailAndPassword(
         auth,
         userinfo.email,
-        userinfo.password
+        userinfo.password,
+        userinfo.displayName
       );
-      navigate('/Home');
+    /*   navigate('/Home'); */
       setUserInfo(initialState);
       
-      console.log(data);
+      console.log(userinfo);
     } catch (error) {
       console.log(error.code);
       if (error.code === "auth/email-already-in-use") {
@@ -71,6 +73,17 @@ const SignUp = () => {
               value={userinfo.email}
               required
               name="email"
+              onChange={handleChange}
+            />
+          </Stack>
+          <Stack>
+            <Input
+              variant="flushed"
+              type="Username"
+              placeholder="Username"
+              value={userinfo.displayName}
+              required
+              name="displayName"
               onChange={handleChange}
             />
           </Stack>

@@ -1,0 +1,10 @@
+.container-chat{
+   width: 800px;
+}
+
+@media screen and (max-width: 720px) {
+    .container-chat{
+        width: 350px;
+     }
+      
+} 

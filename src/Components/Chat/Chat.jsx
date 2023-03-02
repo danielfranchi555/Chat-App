@@ -12,7 +12,6 @@ import {
   Text,
 } from "@chakra-ui/react";
 import "./Chat.scss";
-import { ButtonGroup } from "react-bootstrap";
 import { addDoc, collection, deleteDoc, doc } from "firebase/firestore";
 import { async } from "@firebase/util";
 

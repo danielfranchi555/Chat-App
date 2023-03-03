@@ -25,7 +25,6 @@ const SignIn = () => {
         e.preventDefault()
             const data = 
             await  signInWithEmailAndPassword(auth,user.email,user.password)
-            console.log(data)
             setUser(initialState)
             setLoading(true)
             navigate('/home')

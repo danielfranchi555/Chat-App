@@ -16,7 +16,6 @@ const SignUp = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserInfo({ ...userinfo,[name]:value });
-    console.log(name, value);
   };
   
 
@@ -30,9 +29,9 @@ const SignUp = () => {
         userinfo.displayName
       );
     /*   navigate('/Home'); */
+   
       setUserInfo(initialState);
-      
-      console.log(userinfo);
+       navigate('/Home')
     } catch (error) {
       console.log(error.code);
       if (error.code === "auth/email-already-in-use") {

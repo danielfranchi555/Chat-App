@@ -1,5 +1,5 @@
 import { Button, Input, Stack } from "@chakra-ui/react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword,GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React, { useState } from "react";
 import {  NavLink, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
@@ -18,7 +18,11 @@ const SignIn = () => {
      const {name,value} = e.target
      setUser({...user,[name]:value})
    }
-
+  
+   const loginWithGoogle = async ()=>{
+      const responseGoogle = new GoogleAuthProvider() 
+      return await signInWithPopup(auth,responseGoogle)
+   }
 
     const handleSumbit = async (e)=>{
      try {
@@ -95,9 +99,11 @@ const SignIn = () => {
         </div>
 {/*         {loading? <p>loading</p>:null}
  */}        <div className="div-button" >
-           <Button className="button" type="submit">Iniciar Sesion</Button>
+           <Button style={{margin:'10px'}} className="button" type="submit">Iniciar Sesion</Button>
         </div>
       </form>
+      <Button onClick={()=>loginWithGoogle()} className="button" type="submit">Sign in Google</Button>
+
       </div>
      
       }

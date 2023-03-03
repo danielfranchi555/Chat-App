@@ -12,7 +12,6 @@ const SignIn = () => {
  const [user,setUser]=useState(initialState)
  const [loading,setLoading]=useState(true)
 
-
   const navigate=  useNavigate()
    const handleChange = (e)=>{
      const {name,value} = e.target
@@ -20,15 +19,17 @@ const SignIn = () => {
    }
   
    const loginWithGoogle = async ()=>{
-      const responseGoogle = new GoogleAuthProvider() 
-      return await signInWithPopup(auth,responseGoogle)
-   }
+    const responseGoogle = new GoogleAuthProvider() 
+     await signInWithPopup(auth,responseGoogle) 
+    navigate('/Home')
+ }
 
     const handleSumbit = async (e)=>{
      try {
         e.preventDefault()
             const data = 
-            await  signInWithEmailAndPassword(auth,user.email,user.password)
+            await loginWithGoogle()
+              /* signInWithEmailAndPassword(auth,user.email,user.password) */
             setUser(initialState)
             setLoading(true)
             navigate('/Home')
@@ -100,9 +101,10 @@ const SignIn = () => {
 {/*         {loading? <p>loading</p>:null}
  */}        <div className="div-button" >
            <Button style={{margin:'10px'}} className="button" type="submit">Iniciar Sesion</Button>
+                 <Button onClick={()=>loginWithGoogle()} className="button" type="submit">Sign in Google</Button>
+
         </div>
       </form>
-      <Button onClick={()=>loginWithGoogle()} className="button" type="submit">Sign in Google</Button>
 
       </div>
      

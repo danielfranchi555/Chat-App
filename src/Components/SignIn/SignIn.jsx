@@ -27,7 +27,7 @@ const SignIn = () => {
             await  signInWithEmailAndPassword(auth,user.email,user.password)
             setUser(initialState)
             setLoading(true)
-            navigate('/home')
+            navigate('/Home')
      } catch (error) {
       if(error.code === 'auth/user-not-found')
       alert('Este usuario no existe, por favor registrate')

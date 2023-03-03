@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { auth, db } from "../../firebase";
 import {
   Avatar,
+  AvatarBadge,
+  AvatarGroup,
   Box,
   Button,
   Center,
@@ -12,6 +14,7 @@ import {
   Input,
   Spacer,
   Square,
+  Stack,
   Text,
   Wrap,
   WrapItem,
@@ -77,15 +80,18 @@ const deleteMessage = async (id)=>{
 
   <GridItem  bg='#24527a' area={'main'}>
     {messages.map((item)=>(
-      <div style={{padding:'20px'}}>
+      <div key={item.id} style={{padding:'20px'}}>
         <Wrap>
-           <WrapItem>
-            <Avatar size='sm' name='Kent Dodds' src='https://bit.ly/kent-c-dodds'/>
-           </WrapItem>
+          <WrapItem>
+          <Center>
+            <Avatar size='md'name='Ryan Florence' src='https://bit.ly/ryan-florence'/>
+             <span style={{fontSize:'12px',padding:'10px'}}>{dataUser.displayName}</span>
+          </Center>  
+          </WrapItem>
         </Wrap>
        <div>{
-        user ? <p style={{backgroundColor:'red'}} onClick={()=>deleteMessage(item.id)}>{item.text}</p>:
-        <p style={{backgroundColor:'black'}} onClick={()=>deleteMessage(item.id)}>{item.text}</p>
+        user ? <p onClick={()=>deleteMessage(item.id)}>{item.text}</p>:
+        <p style={{backgroundColor:'black'}} onClick={()=>deleteMessage(item.id)}>{item.text},{item.createdAt}</p>
         }
         
         <p></p>

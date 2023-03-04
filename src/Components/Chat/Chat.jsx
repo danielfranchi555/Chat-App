@@ -37,15 +37,17 @@ const handleChange = (e)=>{
 
 const handleSubmit =  (e)=>{
  e.preventDefault()
-  addDoc(messagesCollection,{text:valueInput,createdAt:serverTimestamp()})
+ const {uid} = auth.currentUser
+ const data =  addDoc(messagesCollection,{text:valueInput,uid,createdAt:serverTimestamp()})
   setValueInput('')
+  console.log(data)
 }
 
 
+console.log(user.displayName)
 const deleteMessage = async (id)=>{
    await deleteDoc(doc(db, "messages", id)); 
 }
-
 
 
 
@@ -64,47 +66,72 @@ const deleteMessage = async (id)=>{
   color='blackAlpha.700'
   fontWeight='bold'
 >
-  <GridItem  bg='#f7f6e7' area={'header'}>
+  <GridItem  bg='#0092ca' style={{borderRadius:'10px 10px 0px 0px '}} area={'header'}>
     <Flex>
       <Box p='2'>
-        {dataUser && dataUser.email}
-      </Box>
+     </Box>
       <Spacer/>
       <Box p='1'>
-        <Link to={'/SignIn'}><Button bg='#24527a'  onClick={()=>userLogOut()}>LogOut</Button> </Link>  
+        <Link to={'/SignIn'}><Button bg='#222831' style={{color:'white'}}  onClick={()=>userLogOut()}>LogOut</Button> </Link>  
       </Box>
-
+     
+    
     </Flex>
 
   </GridItem>
 
-  <GridItem  bg='#24527a' area={'main'}>
-    {messages.map((item)=>(
-      <div key={item.id} style={{padding:'20px'}}>
-        <Wrap>
-          <WrapItem>
-          <Center>
-            <Avatar size='md'name='Ryan Florence' src='https://bit.ly/ryan-florence'/>
-             <span style={{fontSize:'12px',padding:'10px'}}>{dataUser.displayName}</span>
-          </Center>  
+  <GridItem  className="grid-item" bg='#393e46' area={'main'} >       
+  {messages.map((item)=>(
+    <div key={item.id}>
+      <span></span>
+      <div>
+        
+        <Wrap >
+               {item.uid === user.uid?
+               
+               <WrapItem style={{display:'flex',flexDirection:'column',marginLeft:'380px',marginTop:'50px',backgroundColor:'#eeeeee',borderRadius:'5px'}}>
+                <div style={{display:'flex'}}>
+                  <div>
+                    <Avatar size='xs'/>
+                  </div>
+                  <div>
+                    <span style={{fontSize:'12px'}}> {user?user.displayName:'null'}</span>
+                  </div>
+                </div>
+                      <p style={{width:'200px',margin:'5px'}} onClick={()=>deleteMessage(item.id)}>{item.text} {/* <Avatar bg='red.500'  size='xs'/>  */}</p> 
+               </WrapItem>
+          :
+          <WrapItem style={{backgroundColor:'#eeeeee',display:'flex',flexDirection:'column',marginLeft:'20px',borderRadius:'5px',marginTop:'20px'}}>
+                <div style={{display:'flex'}}>
+                  <div>
+                    <Avatar size='xs'/>
+                  </div>
+                  <div>
+                    <span style={{fontSize:'12px'}}> {user.displayName}</span>
+                  </div>
+                </div>
+             <p style={{width:'200px',margin:'5px'}} onClick={()=>deleteMessage(item.id)}>{item.text}</p> 
           </WrapItem>
-        </Wrap>
-       <div>{
-        user ? <p onClick={()=>deleteMessage(item.id)}>{item.text}</p>:
-        <p style={{backgroundColor:'black'}} onClick={()=>deleteMessage(item.id)}>{item.text},{item.createdAt}</p>
-        }
-        
-        <p></p>
-       </div>
-              
-        
-        </div>
-    ))}
+      } 
+      </Wrap>
+      </div> 
+    </div>
+     ))
+
+     }
+  
+  
+
+ 
+
+
+
+
   </GridItem>
   <GridItem  area={'footer'}>
     <form onSubmit={handleSubmit} action="">
 
-          <Input h='30px' bg='#f7f6e7' borderRadius='' value={valueInput} onChange={handleChange } placeholder="message"></Input>
+          <Input h='30px' bg='#0092ca' style={{color:'white',borderRadius:'0px 0px 10px 10px'}} value={valueInput} onChange={handleChange } placeholder="message"></Input>
 
     </form>
   </GridItem>

@@ -14,16 +14,12 @@ const Home = () => {
 
 
  const getMessages =  ()=>{
- const user=  onSnapshot(collection(db, "messages"), (doc) => {
+   onSnapshot(collection(db, "messages"), (doc) => {
    setMessages(doc.docs.map((item)=>({...item.data(),id:item.id})))
 })
 
 
 }
-   /*  const data = await getDocs(messagesCollection) 
-  setMessages(data.docs.map((item)=>({...item.data(),id:item.id})))
-   console.log(messages) */
-
  useEffect(()=>{
   getMessages()
  },[])
@@ -46,8 +42,8 @@ const Home = () => {
       await signOut(auth)
    }
  
+   console.log(dataUser)
 
-  console.log(dataUser)
 
   return (
     <div style={{display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center',marginBottom:'200px'}}>

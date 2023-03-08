@@ -34,12 +34,12 @@ const handleChange = (e)=>{
     const{value}=e.target
     setValueInput(value)
 }
-
+console.log(user)
 
 const handleSubmit =  (e)=>{
  e.preventDefault()
  const {uid} = auth.currentUser
- const data =  addDoc(messagesCollection,{id:uid,text:valueInput,createdAt:Timestamp.now()})
+ const data =  addDoc(messagesCollection,{uid:uid,text:valueInput,createdAt:Timestamp.now()})
   setValueInput('')
   console.log(data)
 }
@@ -69,10 +69,10 @@ const userLogOut = async ()=>{
 
   {messages.sort((a,b)=>a.createdAt - b.createdAt).map((mes)=>(
     <div>
-
+        
         {mes.uid === user.uid?
-          <p style={{display:'flex',flexDirection:'column',width:'200px', marginLeft:'380px',marginTop:'50px',backgroundColor:'black',borderRadius:'5px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text}</p>:
-          <p style={{backgroundColor:'green',width:'200px',display:'flex',flexDirection:'column',marginLeft:'20px',borderRadius:'5px',marginTop:'20px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text}</p>
+          <p style={{display:'flex',flexDirection:'column',width:'200px', marginLeft:'380px',marginTop:'20px',backgroundColor:'black',borderRadius:'5px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text}</p>:
+          <p style={{backgroundColor:'green',width:'200px',display:'flex',flexDirection:'column',marginLeft:'20px',borderRadius:'5px',marginTop:'10px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text}</p>
           }
 
     </div>

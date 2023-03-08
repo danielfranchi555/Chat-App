@@ -55,35 +55,42 @@ const userLogOut = async ()=>{
 
   return (
     <div >
-<Box bg='black' w='800px' p={4} color='white'
+<Box bg='#38598b' w='800px' p={4} color='white'
         maxW={{ base: '350px', sm: '600px' }}
 >
   
-  This is the Box
+  <Heading> Chat</Heading>
 </Box>
-<Box bg='red' w='800px' h='400px' p={4} color='white'
-        maxW={{ base: '350px', sm: '600px' }}
->
-
-
+<Box bg='#e7eaf6' w='800px' h='400px' p={4} color='white'
+maxW={{ base: '350px', sm: '600px' }}>
 
   {messages.sort((a,b)=>a.createdAt - b.createdAt).map((mes)=>(
-    <div className="media-query">
-        
+    <div className="media-query" style={{maxWidth:'200px'}}>
         {mes.uid === user.uid?
-        <Box bg='tomato' w='100%' p={2} m='2' color='white'
-        maxW={{ base: '120px', sm: '300px' }}
-        >
-        ¿{mes.text}
-      </Box>
-  /*          <Box bg='tomato' >
-            {user.displayName}
-                     <p className="parrafo-message" style={{display:'flex',flexDirection:'column', marginLeft:'20px',marginTop:'20px',backgroundColor:'black',borderRadius:'5px',width:'200px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text}</p>
+        <div>
+            <Wrap style={{display:'flex',alignItems:'center'}}>
+          <WrapItem>
+          <Avatar
+      size='xs'
+      name='D'
+      src='https://bit.ly/tioluwani-kolawole'
+    />          <span style={{fontSize:'10px',padding:'5px',color:'black'}}> {user?user.displayName:null}</span> 
 
-           </Box> */:
-          <div>
-          <p className="parrafo-message"  style={{backgroundColor:'green',width:'200px',display:'flex',flexDirection:'column',marginLeft:'300px',borderRadius:'5px',marginTop:'10px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text} {user.displayName} </p>
-          </div>
+          </WrapItem>
+          
+        </Wrap>
+          <Box  style={{borderRadius:'10px'}} bg='#a2a8d3' w='100%' p={2} m='2'  color='white'
+        maxW={{ base: '120px', sm: '300px' }}
+        > 
+       <p style={{fontSize:'17px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text}</p>
+      </Box>
+        </div>
+        
+      
+      :
+            <Box className="box"  bg=' #113f67'>
+            <p style={{padding:'10px'}}> {mes.text}</p>
+          </Box>
           
           }
 
@@ -93,7 +100,7 @@ const userLogOut = async ()=>{
 
 
 </Box>
-<Box bg='black' w='800px'  p={4} color='white'
+<Box bg='#38598b' w='800px'  p={4} color='white'
         maxW={{ base: '350px', sm: '600px' }}
 >
    <form action="" onSubmit={handleSubmit}>

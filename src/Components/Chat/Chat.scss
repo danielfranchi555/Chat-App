@@ -1,3 +1,16 @@
 
+.box{
+   width: 150px;
+   margin-left: 400px;
+   margin-top: 10px;
+   border-radius: 10px;
+}
 
-
+@media screen and (max-width:500px) {
+   .media-query{
+     .box{
+   margin-left: 170px;
+   }  
+   }
+  
+}

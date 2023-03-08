@@ -1,4 +1,4 @@
-import { Button, Card, CardBody, CardFooter, CardHeader, Heading, Text } from "@chakra-ui/react";
+import { Button, Card, CardBody, CardFooter, CardHeader, Center, Heading, Text } from "@chakra-ui/react";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -37,10 +37,12 @@ const navigate = useNavigate()
           <Heading size='md'> <img src={chatImage}  style={{width:'60px'}} alt="" /> </Heading>
         </CardHeader>
         <CardBody>
+          <Center>
           <Text style={{color:'white'}}>La forma más fácil de chatear con personas de todo el mundo</Text>
+          </Center>
         </CardBody>
         <CardFooter>
-          <Button onClick={()=>loginWithGoogle()} style={{backgroundColor:'#0092ca'}}>Sign in Google</Button>
+          <Button onClick={()=>loginWithGoogle()} style={{backgroundColor:'#0092ca',color:'white'}}>Sign in Google</Button>
         </CardFooter>
       </Card>
 /*         <div style={{backgroundColor:'#393e46',width:'800px',display:'flex',flexDirection:'column',justifyContent:'center',alignItems:'center'}}>

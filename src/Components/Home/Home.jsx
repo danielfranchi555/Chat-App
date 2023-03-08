@@ -10,7 +10,6 @@ const Home = () => {
   const [messages,setMessages]= useState([])
   const [dataUser,setDataUser]= useState(null)
 
- const messagesCollection = collection(db,'messages')
 
 
  const getMessages =  ()=>{
@@ -38,9 +37,7 @@ const Home = () => {
 
 
 
-   const userLogOut = async ()=>{
-      await signOut(auth)
-   }
+  
  
    console.log(dataUser)
 

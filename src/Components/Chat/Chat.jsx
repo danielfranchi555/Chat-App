@@ -20,8 +20,9 @@ import {
   WrapItem,
 } from "@chakra-ui/react";
 import "./Chat.scss";
-import { addDoc, collection, deleteDoc, doc, FieldValue, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, deleteDoc, doc, FieldValue, serverTimestamp, Timestamp } from "firebase/firestore";
 import { Link } from "react-router-dom";
+import { signOut } from "firebase/auth";
 
 
 const Chat = ({messages,dataUser}) => {
@@ -38,35 +39,61 @@ const handleChange = (e)=>{
 const handleSubmit =  (e)=>{
  e.preventDefault()
  const {uid} = auth.currentUser
- const data =  addDoc(messagesCollection,{text:valueInput,uid,createdAt:serverTimestamp()})
+ const data =  addDoc(messagesCollection,{id:uid,text:valueInput,createdAt:Timestamp.now()})
   setValueInput('')
   console.log(data)
 }
 
 
-console.log(user.displayName)
 const deleteMessage = async (id)=>{
    await deleteDoc(doc(db, "messages", id)); 
 }
 
-
+const userLogOut = async ()=>{
+  await signOut(auth)
+}
 
   return (
-    <div className="">
-       <Grid
+    <div >
+<Box bg='black' w='800px' p={4} color='white'
+        maxW={{ base: '350px', sm: '600px' }}
+>
+  
+  This is the Box
+</Box>
+<Box bg='red' w='800px' h='400px' p={4} color='white'
+        maxW={{ base: '350px', sm: '600px' }}
+        
+>
+  
+  This is the Box
+</Box>
+<Box bg='black' w='800px' p={4} color='white'
+        maxW={{ base: '350px', sm: '600px' }}
+>
+  
+  <Input size='lg' variant='flushed' placeholder="message"/>
+</Box>
+
+
+
+{/*        <Center>
+      <Grid
   templateAreas={`"header header"
                   "main main"
                   "footer footer"`}
   gridTemplateRows={'50px 1fr 30px'}
   gridTemplateColumns={'150px 1fr'}
   h='500px'
-  w='600px'
+  w='500px'
   gap='0'
   
   color='blackAlpha.700'
   fontWeight='bold'
 >
-  <GridItem  bg='#0092ca' style={{borderRadius:'10px 10px 0px 0px '}} area={'header'}>
+<GridItem  bg='#0092ca'  area={'header'}
+  
+  >
     <Flex>
       <Box p='2'>
      </Box>
@@ -80,10 +107,10 @@ const deleteMessage = async (id)=>{
 
   </GridItem>
 
-  <GridItem  className="grid-item" bg='#393e46' area={'main'} >       
-  {messages.map((item)=>(
+  <GridItem  className="grid-item" bg='#393e46' area={'main'}
+  >       
+  {messages.sort((a,b)=>a.createdAt - b.createdAt).map((item)=>(
     <div key={item.id}>
-      <span></span>
       <div>
         
         <Wrap >
@@ -96,9 +123,10 @@ const deleteMessage = async (id)=>{
                   </div>
                   <div>
                     <span style={{fontSize:'12px'}}> {user?user.displayName:'null'}</span>
+                    <span style={{fontSize:'12px'}}> {user?user.createdAt:'null'}</span>
                   </div>
                 </div>
-                      <p style={{width:'200px',margin:'5px'}} onClick={()=>deleteMessage(item.id)}>{item.text} {/* <Avatar bg='red.500'  size='xs'/>  */}</p> 
+                      <p style={{width:'200px',margin:'5px'}} onClick={()=>deleteMessage(item.id)}>{item.text} </p> 
                </WrapItem>
           :
           <WrapItem style={{backgroundColor:'#eeeeee',display:'flex',flexDirection:'column',marginLeft:'20px',borderRadius:'5px',marginTop:'20px'}}>
@@ -135,7 +163,12 @@ const deleteMessage = async (id)=>{
 
     </form>
   </GridItem>
+
+ 
+ 
 </Grid>
+  </Center> */}
+ 
     </div>
   );
 };

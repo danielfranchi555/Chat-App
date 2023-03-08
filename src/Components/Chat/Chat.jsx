@@ -68,11 +68,23 @@ const userLogOut = async ()=>{
 
 
   {messages.sort((a,b)=>a.createdAt - b.createdAt).map((mes)=>(
-    <div>
+    <div className="media-query">
         
         {mes.uid === user.uid?
-          <p style={{display:'flex',flexDirection:'column',width:'200px', marginLeft:'380px',marginTop:'20px',backgroundColor:'black',borderRadius:'5px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text}</p>:
-          <p style={{backgroundColor:'green',width:'200px',display:'flex',flexDirection:'column',marginLeft:'20px',borderRadius:'5px',marginTop:'10px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text}</p>
+        <Box bg='tomato' w='100%' p={2} m='2' color='white'
+        maxW={{ base: '120px', sm: '300px' }}
+        >
+        ¿{mes.text}
+      </Box>
+  /*          <Box bg='tomato' >
+            {user.displayName}
+                     <p className="parrafo-message" style={{display:'flex',flexDirection:'column', marginLeft:'20px',marginTop:'20px',backgroundColor:'black',borderRadius:'5px',width:'200px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text}</p>
+
+           </Box> */:
+          <div>
+          <p className="parrafo-message"  style={{backgroundColor:'green',width:'200px',display:'flex',flexDirection:'column',marginLeft:'300px',borderRadius:'5px',marginTop:'10px'}} onClick={()=>deleteMessage(mes.id)}>{mes.text} {user.displayName} </p>
+          </div>
+          
           }
 
     </div>

@@ -101,7 +101,7 @@ maxW={{ base: '350px', sm: '600px' }}>
           
         </Wrap>
         <Box bg=' #113f67' style={{borderRadius:'10px'}}>
-            <p style={{padding:'10px'}}> {mes.text}</p>
+            <p style={{padding:'10px'}} onClick={()=>deleteMessage(mes.id)}> {mes.text}</p>
           </Box>
       </div>
             
